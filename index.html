@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Solicitud</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="solicitudForm">
+            <input type="hidden" id="fechaSolicitud" name="fechaSolicitud">
+            
+            <div class="form-group">
+                <label for="nombreApellido">Nombre y Apellido:</label>
+                <input type="text" id="nombreApellido" name="nombreApellido" required>
+            </div>
+
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <select id="empresa" name="empresa" required>
+                    <option value="AESA">AESA</option>
+                    <option value="ASHIRA MYM CABA">ASHIRA MYM CABA</option>
+                    <option value="CHAMICAL">CHAMICAL</option>
+                    <option value="CLIBA CABA">CLIBA CABA</option>
+                    <option value="CLIBA SAN ISIDRO">CLIBA SAN ISIDRO</option>
+                    <option value="CONT.HUGO">CONT.HUGO</option>
+                    <option value="COOP GEST LDTA MORENO">COOP GEST LDTA MORENO</option>
+                    <option value="COOP.GEST.LTDA CABA">COOP.GEST.LTDA CABA</option>
+                    <option value="COVELIA Lanus">COVELIA Lanus</option>
+                    <option value="COVELIA Lomas">COVELIA Lomas</option>
+                    <option value="COVELIA San Martin">COVELIA San Martin</option>
+                    <option value="DAKOTA">DAKOTA</option>
+                    <option value="DELTACOM">DELTACOM</option>
+                    <option value="DORINKA">DORINKA</option>
+                    <option value="ECOCIUDAD">ECOCIUDAD</option>
+                    <option value="FARMACITY">FARMACITY</option>
+                    <option value="HESURMET">HESURMET</option>
+                    <option value="LOGISU">LOGISU</option>
+                    <option value="LUSA">LUSA</option>
+                    <option value="MACROSER">MACROSER</option>
+                    <option value="MARTIN Y MARTIN SAN JUSTO">MARTIN Y MARTIN SAN JUSTO</option>
+                    <option value="NITTIDA">NITTIDA</option>
+                    <option value="OCA LOG">OCA LOG</option>
+                    <option value="OLIVOS TIGRE">OLIVOS TIGRE</option>
+                    <option value="REMOLQUES Y SERVIVCIOS">REMOLQUES Y SERVIVCIOS</option>
+                    <option value="RINKEL TRAIL">RINKEL TRAIL</option>
+                    <option value="SANTA ELENA">SANTA ELENA</option>
+                    <option value="SBASE">SBASE</option>
+                    <option value="SERBECO">SERBECO</option>
+                    <option value="SERTEC">SERTEC</option>
+                    <option value="SERVICIO LUCIO">SERVICIO LUCIO</option>
+                    <option value="SOLBAYRES">SOLBAYRES</option>
+                    <option value="SUPLYCHAY LOGISTICA">SUPLYCHAY LOGISTICA</option>
+                    <option value="TTE OLIVOS MARTELLI">TTE OLIVOS MARTELLI</option>
+                    <option value="Urbaser Moron">Urbaser Moron</option>
+                    <option value="URBASUR">URBASUR</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fechaPermiso">Fecha de Permiso:</label>
+                <input type="date" id="fechaPermiso" name="fechaPermiso" required>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
