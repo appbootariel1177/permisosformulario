@@ -3,69 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Solicitud</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Datos de permisos Gremiales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #6ab04c;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #6ab04c;
+            color: white;
+        }
+        td {
+            text-align: center;
+        }
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #6ab04c;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a9e35;
+        }
+        @media print {
+            body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 20mm;
+                box-sizing: border-box;
+                font-size: 12pt;
+            }
+            .letter-content {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+                box-shadow: none;
+                background-color: white;
+            }
+            .letter-content h2, .letter-content p {
+                margin: 0 0 10px 0;
+            }
+        }
+    </style>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyEdpVTFCxOY7grZKC2zcs0J4vg0NbswTmg6RFjc2vruXYYLGCReDQkZiA94ZZeZsw/exec');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const tableBody = document.getElementById('table-body');
+
+                // Remove header row from data
+                data.shift();
+
+                data.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+
+                    row.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+
+                    const printButton = document.createElement('button');
+                    printButton.textContent = 'Imprimir';
+                    printButton.onclick = () => printRow(index + 1);
+
+                    const td = document.createElement('td');
+                    td.appendChild(printButton);
+                    tr.appendChild(td);
+
+                    tableBody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function printRow(rowIndex) {
+            const rows = document.querySelectorAll('#data-table tr');
+            const selectedRow = rows[rowIndex];
+
+            const nombreApellido = selectedRow.cells[0].textContent;
+            const fechaPermiso = selectedRow.cells[1].textContent;
+            const empresa = selectedRow.cells[2].textContent;
+            const fechaGeneracion = new Date().toLocaleDateString();
+
+            const printContent = `
+              <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        @media print {
+                            body {
+                                width: 210mm;
+                                height: 297mm;
+                                margin: 0;
+                                padding: 20mm;
+                                box-sizing: border-box;
+                                font-size: 12pt;
+                                font-family: Arial, sans-serif;
+                            }
+                            .letter-content {
+                                width: 100%;
+                                margin: 0;
+                                padding: 0;
+                                border: none;
+                                box-shadow: none;
+                                background-color: white;
+                            }
+                            .letter-content h2, .letter-content p {
+                                margin: 0 0 10px 0;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="letter-content">
+                       <div style="text-align: center; margin-top: 140px;">
+                         <h5 style="display: inline;line-height: 4;">Ciudad Autónoma de Buenos Aires</h5>
+                         <p style="display: inline;">${fechaGeneracion}</p>
+                         </div>
+                        <p style="margin-top: 40px;">
+                            De: Rama Remolques Mecanicos</p>
+                        <p>Cro.: Avendaño Hector</p>
+                        <p>A: <span style="font-size: 1.2em; font-weight: bold;"> ${empresa}</span></p>
+                        <p>Ref: Permiso gremial</p>
+                        <p>De mi mayor consideración:</p>
+                        <p style="line-height: 2;">Tenemos el agrado de dirigirnos a UD. Con la finalidad de comunicarles que el/los compañeros,<span style="font-size: 1.2em; font-weight: bold;"> ${nombreApellido}</span> no asistió/ieron a su labor habitual durante el/los días<span style="font-size: 1.2em; font-weight: bold;"> ${fechaPermiso}</span>, por haber estado afectado/a a tareas gremiales en esta asociación sindical.</p>
+                        <p style="line-height: 2;">Con tal motivo, requerimos de su amabilidad quiera tener a bien reconocer los jornales correspondientes conjuntamente con los adicionales que se aplican según lo estipulado en el CCT 40/89.</p>
+                        <p>Sin otro particular, saludamos a UD. Muy atentamente.</p>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        window.onload = fetchData;
+    </script>
 </head>
 <body>
-    <div class="container">
-        <form id="solicitudForm">
-            <input type="hidden" id="fechaSolicitud" name="fechaSolicitud">
-            
-            <div class="form-group">
-                <label for="nombreApellido">Nombre y Apellido:</label>
-                <input type="text" id="nombreApellido" name="nombreApellido" required>
-            </div>
-
-            <div class="form-group">
-                <label for="empresa">Empresa:</label>
-                <select id="empresa" name="empresa" required>
-                    <option value="AESA">AESA</option>
-                    <option value="ASHIRA MYM CABA">ASHIRA MYM CABA</option>
-                    <option value="CHAMICAL">CHAMICAL</option>
-                    <option value="CLIBA CABA">CLIBA CABA</option>
-                    <option value="CLIBA SAN ISIDRO">CLIBA SAN ISIDRO</option>
-                    <option value="CONT.HUGO">CONT.HUGO</option>
-                    <option value="COOP GEST LDTA MORENO">COOP GEST LDTA MORENO</option>
-                    <option value="COOP.GEST.LTDA CABA">COOP.GEST.LTDA CABA</option>
-                    <option value="COVELIA Lanus">COVELIA Lanus</option>
-                    <option value="COVELIA Lomas">COVELIA Lomas</option>
-                    <option value="COVELIA San Martin">COVELIA San Martin</option>
-                    <option value="DAKOTA">DAKOTA</option>
-                    <option value="DELTACOM">DELTACOM</option>
-                    <option value="DORINKA">DORINKA</option>
-                    <option value="ECOCIUDAD">ECOCIUDAD</option>
-                    <option value="FARMACITY">FARMACITY</option>
-                    <option value="HESURMET">HESURMET</option>
-                    <option value="LOGISU">LOGISU</option>
-                    <option value="LUSA">LUSA</option>
-                    <option value="MACROSER">MACROSER</option>
-                    <option value="MARTIN Y MARTIN SAN JUSTO">MARTIN Y MARTIN SAN JUSTO</option>
-                    <option value="NITTIDA">NITTIDA</option>
-                    <option value="OCA LOG">OCA LOG</option>
-                    <option value="OLIVOS TIGRE">OLIVOS TIGRE</option>
-                    <option value="REMOLQUES Y SERVIVCIOS">REMOLQUES Y SERVIVCIOS</option>
-                    <option value="RINKEL TRAIL">RINKEL TRAIL</option>
-                    <option value="SANTA ELENA">SANTA ELENA</option>
-                    <option value="SBASE">SBASE</option>
-                    <option value="SERBECO">SERBECO</option>
-                    <option value="SERTEC">SERTEC</option>
-                    <option value="SERVICIO LUCIO">SERVICIO LUCIO</option>
-                    <option value="SOLBAYRES">SOLBAYRES</option>
-                    <option value="SUPLYCHAY LOGISTICA">SUPLYCHAY LOGISTICA</option>
-                    <option value="TTE OLIVOS MARTELLI">TTE OLIVOS MARTELLI</option>
-                    <option value="Urbaser Moron">Urbaser Moron</option>
-                    <option value="URBASUR">URBASUR</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="fechaPermiso">Fecha de Permiso:</label>
-                <input type="date" id="fechaPermiso" name="fechaPermiso" required>
-            </div>
-
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
+    <h1>Datos de permisos Gremiales</h1>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Nombre y Apellido</th>
+                <th>Fecha de Permiso</th>
+                <th>Empresa</th>
+                <th>Solicitado</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data rows will be inserted here dynamically -->
+        </tbody>
+    </table>
 </body>
 </html>
