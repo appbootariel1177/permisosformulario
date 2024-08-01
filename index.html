@@ -29,7 +29,7 @@ table {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(10, 1, 1, 0.1);
+  box-shadow: 0 0 190px rgba(10, 1, 1, 10);
 }
 th, td {
   padding: 12px;
@@ -66,12 +66,12 @@ button:hover {
   cursor: default;
 }
 
-.button-home {
-  background-color: #3498db; /* Color azul para el botón */
+.refresh-button {
+  background-color: #4a90e2; /* Color azulado */
 }
 
-.button-home:hover {
-  background-color: #2980b9; /* Color azul más oscuro al pasar el cursor */
+.refresh-button:hover {
+  background-color: #357abd; /* Color más oscuro al pasar el cursor */
 }
 
 @media print {
@@ -96,7 +96,6 @@ button:hover {
   }
 }
 
-
     </style>
     <script>
         async function fetchData() {
@@ -106,7 +105,6 @@ button:hover {
                 const data = await response.json();
                 const tableBody = document.getElementById('table-body');
 
-                // Remove header row from data
                 data.shift();
 
                 data.forEach((row, index) => {
@@ -196,7 +194,6 @@ button:hover {
             printWindow.document.close();
             printWindow.print();
 
-            // Change button text and color after printing
             button.textContent = 'Ya se imprimió';
             button.classList.add('printed');
             button.disabled = true;
@@ -214,13 +211,10 @@ button:hover {
                 <th>Fecha de Permiso</th>
                 <th>Empresa</th>
                 <th>Solicitado</th>
-                <th>
-                    <button class="button-home" onclick="window.location.href='https://script.google.com/macros/s/AKfycbyR5MR3QwJlc-AiOxiyAv__s8ROLjPT8MhgX65GJn-4cUqDidajW0wiViK-ri8eGyOQ/exec'">Ir a inicio</button>
-                </th>
+                <th><button class="refresh-button" onclick="location.reload();">Ir a inicio</button></th>
             </tr>
         </thead>
         <tbody id="table-body">
-            <!-- Data rows will be inserted here dynamically -->
         </tbody>
     </table>
 </body>
