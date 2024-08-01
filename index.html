@@ -5,77 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos de permisos Gremiales</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #6ab04c;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #6ab04c;
-            color: white;
-        }
-        td {
-            text-align: center;
-        }
-        button {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            background-color: #6ab04c;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #4a9e35;
-        }
-        .printed {
-            background-color: #888;
-            cursor: default;
-        }
-        @media print {
-            body {
-                width: 210mm;
-                height: 297mm;
-                margin: 0;
-                padding: 20mm;
-                box-sizing: border-box;
-                font-size: 12pt;
-            }
-            .letter-content {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                border: none;
-                box-shadow: none;
-                background-color: white;
-            }
-            .letter-content h2, .letter-content p {
-                margin: 0 0 10px 0;
-            }
-        }
+body {
+  font-family: 'Arial', sans-serif; /* Define la fuente del texto como Arial o, si no está disponible, una fuente sans-serif genérica */
+  background: linear-gradient(135deg, #a8d5ba, #d4e8d1, #b0e6c7); /* Aplica un fondo con un degradado lineal en un ángulo de 135 grados, usando tres tonos de verde suave */
+  display: flex; /* Utiliza el modelo de caja flexible para el contenedor del body */
+  flex-direction: column; /* Ordena los elementos hijos en una columna, uno debajo del otro */
+  align-items: center; /* Centra horizontalmente todos los elementos hijos dentro del body */
+  justify-content: center; /* Centra verticalmente todos los elementos hijos dentro del body */
+  height: 100vh; /* Establece la altura del body al 100% de la altura de la ventana del navegador */
+  margin: 0; /* Elimina el margen por defecto del navegador alrededor del body */
+  padding: 20px; /* Agrega un relleno de 20 píxeles dentro del body */
+}
+
+h1 {
+  color: #6ab04c; /* Color del texto del título */
+}
+
+table {
+  border-collapse: collapse; /* Colapsa los bordes de las celdas en una sola línea */
+  width: 80%; /* Establece el ancho de la tabla al 80% del contenedor */
+  margin-top: 20px; /* Añade un margen superior de 20 píxeles */
+  border: 1px solid #ccc; /* Bordea la tabla con una línea sólida y color gris claro */
+  background-color: #fff; /* Color de fondo de la tabla */
+  border-radius: 8px; /* Redondea las esquinas de la tabla */
+  overflow: hidden; /* Oculta el contenido que sobresale del borde redondeado */
+  box-shadow: 0 0 190px rgba(10, 1, 1, 10); /* Añade una sombra grande y centrada detrás de la tabla */
+}
+th, td {
+  padding: 12px; /* Añade un relleno de 12 píxeles dentro de las celdas */
+  border: 1px solid #ddd; /* Bordea las celdas con una línea sólida y color gris claro */
+}
+
+th {
+  background-color: #6ab04c; /* Color de fondo de los encabezados de las columnas */
+  color: white; /* Color del texto en los encabezados de las columnas */
+}
+
+td {
+  text-align: center; /* Centra el texto dentro de las celdas */
+}
+
+button {
+  padding: 6px 12px; /* Añade un relleno de 6 píxeles en vertical y 12 píxeles en horizontal */
+  border: none; /* Elimina el borde por defecto */
+  border-radius: 4px; /* Redondea las esquinas del botón */
+  background-color: #6ab04c; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra al botón */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Suaviza la transición de color de fondo y sombra */
+}
+
+button:hover {
+  background-color: #4a9e35; /* Color de fondo del botón al pasar el cursor sobre él */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el cursor sobre el botón */
+}
+
+.printed {
+  background-color: #888; /* Color de fondo del botón cuando está impreso */
+  cursor: default; /* Cambia el cursor a por defecto */
+}
+
+@media print {
+  body {
+    width: 210mm; /* Ancho del cuerpo al imprimir */
+    height: 297mm; /* Altura del cuerpo al imprimir */
+    margin: 0; /* Elimina el margen por defecto */
+    padding: 20mm; /* Añade un relleno de 20mm */
+    box-sizing: border-box; /* Incluye el padding y el border en el tamaño total */
+    font-size: 12pt; /* Establece el tamaño de la fuente a 12 puntos */
+  }
+  .letter-content {
+    width: 100%; /* Ancho del contenido de la carta */
+    margin: 0; /* Elimina el margen */
+    padding: 0; /* Elimina el padding */
+    border: none; /* Elimina el borde */
+    box-shadow: none; /* Elimina la sombra */
+    background-color: white; /* Establece el color de fondo a blanco */
+  }
+  .letter-content h2, .letter-content p {
+    margin: 0 0 10px 0; /* Añade un margen inferior de 10px */
+  }
+}
+
+
     </style>
     <script>
         async function fetchData() {
